@@ -14,16 +14,12 @@ class ShieldsCommand extends Command {
     final path = guard(() => args.first, 'README.md');
 
     final props = ShieldProps(
-      githubName: String.fromEnvironment(
-        'GITHUB_USERNAME',
-        defaultValue: await question('GitHub username'),
-      ),
-      host: String.fromEnvironment(
-        'SHIELDS_HOST',
-        defaultValue: await question('Hostname'),
-      ),
+      githubName: Platform.environment['GITHUB_USERNAME'] ??
+          await question('GitHub username'),
+      host: Platform.environment['SHIELDS_HOST'] ?? await question('Hostname'),
       packageName: await question('Package name'),
-      twitterName: await question('Twitter name'),
+      twitterName: Platform.environment['TWITTER_USERNAME'] ??
+          await question('Twitter username'),
     );
 
     final f = File(Directory.current.path.joinAll([path]))..createIfNotExists();
