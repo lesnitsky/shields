@@ -1,4 +1,6 @@
+import 'dart:io';
 import 'dart:math';
+import 'package:l_cli/question.dart';
 import 'package:tmpl/tmpl.dart';
 
 final template = Template(
@@ -16,6 +18,17 @@ class ShieldProps {
   final String githubName;
   final String twitterName;
   final String hash;
+
+  static Future<ShieldProps> read() async {
+    return ShieldProps(
+      githubName: Platform.environment['GITHUB_USERNAME'] ??
+          await question('GitHub username'),
+      host: Platform.environment['SHIELDS_HOST'] ?? await question('Hostname'),
+      packageName: await question('Package name'),
+      twitterName: Platform.environment['TWITTER_USERNAME'] ??
+          await question('Twitter username'),
+    );
+  }
 
   ShieldProps({
     this.host,
