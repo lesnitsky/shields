@@ -19,12 +19,12 @@ class ShieldProps {
   final String twitterName;
   final String hash;
 
-  static Future<ShieldProps> read() async {
+  static Future<ShieldProps> read({String packageName}) async {
     return ShieldProps(
       githubName: Platform.environment['GITHUB_USERNAME'] ??
           await question('GitHub username'),
       host: Platform.environment['SHIELDS_HOST'] ?? await question('Hostname'),
-      packageName: await question('Package name'),
+      packageName: packageName ?? await question('Package name'),
       twitterName: Platform.environment['TWITTER_USERNAME'] ??
           await question('Twitter username'),
     );
