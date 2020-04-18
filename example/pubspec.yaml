@@ -1,0 +1,6 @@
+name: shields_example
+version: 1.0.0
+
+dependencies:
+  shields:
+    path: ../
